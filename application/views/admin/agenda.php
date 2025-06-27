@@ -6,8 +6,8 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1 class="h3 text-gray-800">Kegiatan</h1>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#agendaModal">Tambah Kegiatan</button>
+                    <h1 class="h3 text-gray-800">Agenda</h1>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#agendaModal">Tambah Agenda</button>
                 </div>
 
                 <?php if ($this->session->flashdata('success')): ?>

@@ -13,9 +13,9 @@
         <div class="sidebar-heading">CMS</div>
 
         <li class="nav-item">
-            <a class="nav-link" href="CMSMenu">
-                <i class="fas fa-sliders-h"></i>
-                <span>CMS</span>
+            <a class="nav-link" href="Agenda">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Agenda</span>
             </a>
         </li>
         <li class="nav-item">
@@ -31,15 +31,15 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="Agenda">
-                <i class="fas fa-calendar-alt"></i>
-                <span>Agenda</span>
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="Daftar">
                 <i class="fas fa-id-card"></i>
                 <span>Pendafaran</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="CMSMenu">
+                <i class="fas fa-sliders-h"></i>
+                <span>Pengaturan CMS</span>
             </a>
         </li>
         <div class="mt-auto text-center p-4">
