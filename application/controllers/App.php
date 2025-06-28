@@ -10,7 +10,7 @@ class App extends CI_Controller
         $this->load->model('Gallery_model');
         $this->load->model('Capaian_model');
 
-        $menu_settings = $this->CMSMenu_model->getAll(); // Hasilnya array, bukan object
+        $menu_settings = $this->CMSMenu_model->getAll();
         $menu_status = [];
 
         foreach ($menu_settings as $menu) {
