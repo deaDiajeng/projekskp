@@ -1,7 +1,6 @@
 <style>
     .carousel-inner .carousel-item img {
         height: 400px;
-        /* sesuaikan tinggi yang kamu mau */
         object-fit: cover;
         width: 100%;
     }
@@ -21,6 +20,7 @@ include 'layout/navbar.php';
     </div>
 </section>
 
+<!-- Profil Sekolah -->
 <div class="container py-5">
     <div class="row py-3">
         <div class="col-lg-7 mt-5 mb-4">
@@ -32,106 +32,71 @@ include 'layout/navbar.php';
             </p>
         </div>
         <div class="col-lg-5 mb-4">
-            <img src="<?= base_url('uploads/imgsan.jpg')?>" class="d-block w-100 rounded" alt="...">
+            <img src="<?= base_url('uploads/imgsan.jpg') ?>" class="d-block w-100 rounded" alt="...">
         </div>
     </div>
 </div>
 
 <!-- Capaian -->
 <?php if (!empty($menu_status['capaian'])): ?>
-    <section class="py-5 bg-light" id="hafalan">
-        <div class="container">
-            <h3 class="text-uppercase text-center">Capaian Hafalan</h3>
-            <h5 class="text-center text-muted mb-5">Selama belajar di Rumah Quran Insan Toda</h5>
+<section class="py-5 bg-light" id="hafalan">
+    <div class="container">
+        <h3 class="text-uppercase text-center">Capaian Hafalan</h3>
+        <h5 class="text-center text-muted mb-5">Selama belajar di Rumah Quran Insan Toda</h5>
 
-            <?php if (!empty($capaian)) : ?>
-                <div id="capaianCarousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <?php foreach (array_chunk($capaian, 3) as $index => $group): ?>
-                            <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                                <div class="row justify-content-center">
-                                    <?php foreach ($group as $item): ?>
-                                        <div class="col-md-4 mb-4">
-                                            <div class="card border-0 shadow-sm h-100 text-center">
-                                                <?php if (!empty($item->image)): ?>
-                                                    <img src="<?= base_url('uploads/capaian/' . htmlspecialchars($item->image)) ?>"
-                                                        class="card-img-top img-fluid"
-                                                        style="height: 180px; object-fit: cover;"
-                                                        alt="<?= htmlspecialchars($item->name ?? '-') ?>">
-                                                <?php endif; ?>
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-uppercase"><?= htmlspecialchars($item->name ?? '-') ?></h5>
-                                                    <p class="card-text text-muted"><?= htmlspecialchars($item->achievement ?? '-') ?></p>
-                                                </div>
+        <?php if (!empty($capaian)) : ?>
+            <div id="capaianCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <?php foreach (array_chunk($capaian, 3) as $index => $group): ?>
+                        <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                            <div class="row justify-content-center">
+                                <?php foreach ($group as $item): ?>
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card border-0 shadow-sm h-100 text-center">
+                                            <?php if (!empty($item->image)): ?>
+                                                <img src="<?= base_url('uploads/capaian/' . htmlspecialchars($item->image)) ?>"
+                                                    class="card-img-top img-fluid"
+                                                    style="height: 180px; object-fit: cover;"
+                                                    alt="<?= htmlspecialchars($item->name ?? '-') ?>">
+                                            <?php endif; ?>
+                                            <div class="card-body">
+                                                <h5 class="card-title text-uppercase"><?= htmlspecialchars($item->name ?? '-') ?></h5>
+                                                <p class="card-text text-muted"><?= htmlspecialchars($item->achievement ?? '-') ?></p>
                                             </div>
                                         </div>
-                                    <?php endforeach; ?>
-                                </div>
+                                    </div>
+                                <?php endforeach; ?>
                             </div>
-                        <?php endforeach; ?>
-                    </div>
-                    <a class="carousel-control-prev" href="#capaianCarousel" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                        <span class="sr-only">Sebelumnya</span>
-                    </a>
-                    <a class="carousel-control-next" href="#capaianCarousel" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                        <span class="sr-only">Berikutnya</span>
-                    </a>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-            <?php else: ?>
-                <p class="text-center text-muted">Belum ada capaian ditampilkan.</p>
-            <?php endif; ?>
-        </div>
-    </section>
+                <a class="carousel-control-prev" href="#capaianCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                    <span class="sr-only">Sebelumnya</span>
+                </a>
+                <a class="carousel-control-next" href="#capaianCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                    <span class="sr-only">Berikutnya</span>
+                </a>
+            </div>
+        <?php else: ?>
+            <p class="text-center text-muted">Belum ada capaian ditampilkan.</p>
+        <?php endif; ?>
+    </div>
+</section>
 <?php endif; ?>
 
-<!-- yang auto slide dan gerak nya halus
-<?php if (!empty($menu_status['capaian'])): ?>
-    <section class="py-5 bg-light" id="hafalan">
-        <div class="container">
-            <h3 class="text-uppercase text-center">Capaian Hafalan</h3>
-            <h5 class="text-center text-muted mb-5">Capaian hafalan santri selama belajar di Rumah Quran Insan Toda</h5>
-
-            <?php if (!empty($capaian)) : ?>
-                <div id="capaianSplide" class="splide">
-                    <div class="splide__track">
-                        <ul class="splide__list">
-                            <?php foreach ($capaian as $item): ?>
-                                <li class="splide__slide">
-                                    <div class="card border-0 shadow-sm h-100 text-center">
-                                        <?php if (!empty($item->image)): ?>
-                                            <img src="<?= base_url('uploads/capaian/' . htmlspecialchars($item->image)) ?>"
-                                                class="card-img-top img-fluid"
-                                                style="height: 180px; object-fit: cover;"
-                                                alt="<?= htmlspecialchars($item->name ?? '-') ?>">
-                                        <?php endif; ?>
-                                        <div class="card-body">
-                                            <h5 class="card-title text-uppercase"><?= htmlspecialchars($item->name ?? '-') ?></h5>
-                                            <p class="card-text text-muted"><?= htmlspecialchars($item->achievement ?? '-') ?></p>
-                                        </div>
-                                    </div>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-                </div>
-            <?php else: ?>
-                <p class="text-center text-muted">Belum ada capaian ditampilkan.</p>
-            <?php endif; ?>
-        </div>
-    </section>
-<?php endif; ?> -->
-
-
+<!-- Galeri dan Agenda -->
+<?php if (!empty($menu_status['gallery']) || !empty($menu_status['agenda'])): ?>
 <section class="page-section bg-light" id="galeri">
     <div class="container py-5">
         <div class="row">
-            <!-- GALLERY SEKOLAH -->
+
+            <!-- Gallery Sekolah -->
+            <?php if (!empty($menu_status['gallery'])): ?>
             <div class="col-lg-6 mb-4">
                 <div class="bg-dark text-white rounded shadow p-3">
                     <div class="h5 text-uppercase pb-2">Gallery Sekolah</div>
-                    <!-- <h4 class="text-uppercase mb-3">Gallery Sekolah</h4> -->
                     <?php if (!empty($gallery)) : ?>
                         <div id="carouselGaleri" class="carousel slide carousel-fade" data-ride="carousel">
                             <div class="carousel-inner">
@@ -159,11 +124,12 @@ include 'layout/navbar.php';
                     <?php endif; ?>
                 </div>
             </div>
+            <?php endif; ?>
 
-            <!-- KEGIATAN SEKOLAH -->
-            <div class="col-xxl-7 col-lg-6 mb-3 mb-lg-4" id="galeri">
+            <!-- Kegiatan Sekolah -->
+            <?php if (!empty($menu_status['agenda'])): ?>
+            <div class="col-xxl-7 col-lg-6 mb-3 mb-lg-4">
                 <div class="h5 text-uppercase">Kegiatan Sekolah</div>
-                <!-- <h4 class="text-uppercase mb-3">Kegiatan Sekolah</h4> -->
                 <?php if (!empty($agenda)) : ?>
                     <?php foreach ($agenda as $event): ?>
                         <div class="media mb-4 border-bottom pb-2">
@@ -182,10 +148,12 @@ include 'layout/navbar.php';
                     <p class="text-muted">Belum ada kegiatan sekolah.</p>
                 <?php endif; ?>
             </div>
+            <?php endif; ?>
 
         </div>
     </div>
 </section>
+<?php endif; ?>
 
 <!-- CTA Pendaftaran -->
 <section class="py-5 bg-success text-white text-center">
@@ -207,8 +175,8 @@ include 'layout/navbar.php';
                 </iframe>
             </div>
             <div class="col-lg-6 mb-4" id="profil">
-                    <div class="col-lg-15 mb-4">
-                    <img src="<?= base_url('uploads/sampul 1.jpg')?>" class="d-block w-100 rounded" alt="...">
+                <div class="col-lg-15 mb-4">
+                    <img src="<?= base_url('uploads/sampul 1.jpg') ?>" class="d-block w-100 rounded" alt="...">
                     <h2 class="fw-bold mt-3 text-center">RUMAH QUR'AN INSAN TODA</h2>
                     <p class="text-muted mb-">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
@@ -221,14 +189,12 @@ include 'layout/navbar.php';
     </div>
 </section>
 
-        <div class="bg-dark text-white py-3 border-top border-secondary">
-            <div class="container">
-                <div class="d-lg-flex justify-content-between">
-                    <div class="mb-2 mb-lg-0">Rumah Qur'an Insan Toda &copy; 2025</div>
-                    <!-- <div class="mb-2 mb-lg-0">Rumah Qur'an Insan Toda</a></div> -->
-                    <!-- <div class="mb-2 mb-lg-0">Template by <a href="https://naevaweb.com" class="text-white text-decoration-none">Naevaweb.com</a></div> -->
-                </div>
-            </div>
+<div class="bg-dark text-white py-3 border-top border-secondary">
+    <div class="container">
+        <div class="d-lg-flex justify-content-between">
+            <div class="mb-2 mb-lg-0">Rumah Qur'an Insan Toda &copy; 2025</div>
         </div>
+    </div>
+</div>
 
 <?php include 'layout/footer.php'; ?>
