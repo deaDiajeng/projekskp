@@ -4,6 +4,44 @@
         object-fit: cover;
         width: 100%;
     }
+@media (max-width: 768px) {
+    #capaianSplide .splide__slide {
+        min-width: 180px !important;
+        max-width: 180px !important;
+    }
+    #capaianSplide {
+        max-height: 300px;
+    }
+}
+
+#capaianSplide {
+    max-height: 330px; /* Membatasi area slider */
+    overflow: hidden;
+}
+
+#capaianSplide .splide__track {
+    height: auto !important;
+    overflow: hidden !important;
+}
+
+#capaianSplide .splide__slide {
+    min-width: 220px !important;
+    max-width: 220px !important;
+    display: flex;
+    justify-content: center;
+}
+
+#capaianSplide .card {
+    width: 200px;
+    height: 100%;
+    max-height: 300px;
+}
+
+#capaianSplide .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
 </style>
 
 <?php
@@ -21,7 +59,7 @@ include 'layout/navbar.php';
 </section>
 
 <!-- Profil Sekolah -->
-<div class="container py-5">
+<div class="container py-1">
     <div class="row py-3">
         <div class="col-lg-7 mt-5 mb-4">
             <h1>RUMAH QUR'AN INSAN TODA</h1>
@@ -45,39 +83,25 @@ include 'layout/navbar.php';
         <h5 class="text-center text-muted mb-5">Selama belajar di Rumah Quran Insan Toda</h5>
 
         <?php if (!empty($capaian)) : ?>
-            <div id="capaianCarousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <?php foreach (array_chunk($capaian, 3) as $index => $group): ?>
-                        <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                            <div class="row justify-content-center">
-                                <?php foreach ($group as $item): ?>
-                                    <div class="col-md-4 mb-4">
-                                        <div class="card border-0 shadow-sm h-100 text-center">
-                                            <?php if (!empty($item->image)): ?>
-                                                <img src="<?= base_url('uploads/capaian/' . htmlspecialchars($item->image)) ?>"
-                                                    class="card-img-top img-fluid"
-                                                    style="height: 180px; object-fit: cover;"
-                                                    alt="<?= htmlspecialchars($item->name ?? '-') ?>">
-                                            <?php endif; ?>
-                                            <div class="card-body">
-                                                <h5 class="card-title text-uppercase"><?= htmlspecialchars($item->name ?? '-') ?></h5>
-                                                <p class="card-text text-muted"><?= htmlspecialchars($item->achievement ?? '-') ?></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
+            <div id="capaianSplide" class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <?php foreach ($capaian as $item): ?>
+<li class="splide__slide">
+    <div class="card border-0 shadow-sm text-center">
+        <?php if (!empty($item->image)): ?>
+            <img src="<?= base_url('uploads/capaian/' . htmlspecialchars($item->image)) ?>"
+                style="height: 180px; object-fit: cover; width: 100%;">
+        <?php endif; ?>
+        <div class="card-body p-2">
+            <h6 class="card-title text-uppercase mb-1"><?= htmlspecialchars($item->name ?? '-') ?></h6>
+            <p class="card-text text-muted mb-0"><?= htmlspecialchars($item->achievement ?? '-') ?></p>
+        </div>
+    </div>
+</li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
-                <a class="carousel-control-prev" href="#capaianCarousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                    <span class="sr-only">Sebelumnya</span>
-                </a>
-                <a class="carousel-control-next" href="#capaianCarousel" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                    <span class="sr-only">Berikutnya</span>
-                </a>
             </div>
         <?php else: ?>
             <p class="text-center text-muted">Belum ada capaian ditampilkan.</p>
@@ -89,7 +113,7 @@ include 'layout/navbar.php';
 <!-- Galeri dan Agenda -->
 <?php if (!empty($menu_status['gallery']) || !empty($menu_status['agenda'])): ?>
 <section class="page-section bg-light" id="galeri">
-    <div class="container py-5">
+    <div class="container pb-2">
         <div class="row">
 
             <!-- Gallery Sekolah -->
@@ -131,7 +155,7 @@ include 'layout/navbar.php';
             <div class="col-xxl-7 col-lg-6 mb-3 mb-lg-4">
                 <div class="h5 text-uppercase">Kegiatan Sekolah</div>
                 <?php if (!empty($agenda)) : ?>
-                    <?php foreach ($agenda as $event): ?>
+                    <?php foreach (array_slice($agenda, 0, 4) as $event): ?>
                         <div class="media mb-4 border-bottom pb-2">
                             <img src="<?= base_url('uploads/agenda/' . htmlspecialchars($event->image ?? 'default.jpg')); ?>"
                                 class="mr-3 rounded"
@@ -198,3 +222,18 @@ include 'layout/navbar.php';
 </div>
 
 <?php include 'layout/footer.php'; ?>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Splide('#capaianSplide', {
+            type: 'loop',
+            autoWidth: true, // ✅ wajib autoWidth
+            gap: '0.2rem',
+            pagination: false,
+            arrows: false,
+            autoScroll: {
+                speed: 1,
+            }
+        }).mount(window.splide.Extensions);
+    });
+</script>
