@@ -1,11 +1,14 @@
 <script>
     $(document).ready(function() {
         $('.btn-edit').on('click', function() {
+            // console.log("data", data);
             const id = $(this).data('id');
             const title = $(this).data('title');
             const descript = $(this).data('descript');
             const date = $(this).data('date');
             const image = $(this).data('image');
+            console.log("id", id)
+            console.log("date", date);
 
             $('#agendaModalLabel').text('Edit Agenda');
             $('#form-agenda').attr('action', '<?= base_url('Agenda/update') ?>');
