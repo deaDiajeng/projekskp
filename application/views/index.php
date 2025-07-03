@@ -1,22 +1,10 @@
 <style>
-    .carousel-inner .carousel-item img {
-        height: 400px;
-        object-fit: cover;
-        width: 100%;
-    }
-@media (max-width: 768px) {
-    #capaianSplide .splide__slide {
-        min-width: 180px !important;
-        max-width: 180px !important;
-    }
-    #capaianSplide {
-        max-height: 300px;
-    }
-}
-
+/* Gaya slider */
 #capaianSplide {
-    max-height: 330px; /* Membatasi area slider */
+    max-height: 330px;
     overflow: hidden;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 #capaianSplide .splide__track {
@@ -35,13 +23,48 @@
     width: 200px;
     height: 100%;
     max-height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 #capaianSplide .card img {
     width: 100%;
     height: 180px;
     object-fit: cover;
+    border-bottom: 1px solid #ddd;
 }
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+    #capaianSplide .splide__slide {
+        min-width: 180px !important;
+        max-width: 180px !important;
+    }
+
+    #capaianSplide {
+        max-height: 300px;
+    }
+}
+
+/* Section spacing enhancement */
+section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+section h3 {
+    margin-bottom: 1rem;
+}
+
+section h5 {
+    margin-bottom: 2rem;
+}
+
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 </style>
 
 <?php
@@ -59,15 +82,13 @@ include 'layout/navbar.php';
 </section>
 
 <!-- Profil Sekolah -->
-<div class="container py-1">
-    <div class="row py-3">
-        <div class="col-lg-7 mt-5 mb-4">
-            <h1>RUMAH QUR'AN INSAN TODA</h1>
-            <h4>Menjadi Sekolah yang menyenangkan bagi siswa</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-            <p>
-                <a href="<?= site_url('form') ?>" class="btn btn-dark">DAFTAR SEKARANG</a>
-            </p>
+<div class="container py-5">
+    <div class="row align-items-center">
+        <div class="col-lg-7 mb-4">
+            <h1 class="mb-3">RUMAH QUR'AN INSAN TODA</h1>
+            <h4 class="mb-4">Menjadi Sekolah yang menyenangkan bagi siswa</h4>
+            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
+            <a href="<?= site_url('form') ?>" class="btn btn-dark">DAFTAR SEKARANG</a>
         </div>
         <div class="col-lg-5 mb-4">
             <img src="<?= base_url('uploads/imgsan.jpg') ?>" class="d-block w-100 rounded" alt="...">
@@ -75,30 +96,31 @@ include 'layout/navbar.php';
     </div>
 </div>
 
+
 <!-- Capaian -->
 <?php if (!empty($menu_status['capaian'])): ?>
 <section class="py-5 bg-light" id="hafalan">
-    <div class="container">
-        <h3 class="text-uppercase text-center">Capaian Hafalan</h3>
-        <h5 class="text-center text-muted mb-5">Selama belajar di Rumah Quran Insan Toda</h5>
+    <div class="container text-center">
+        <h3 class="text-uppercase">Capaian Hafalan</h3>
+        <h5 class="text-muted mb-5">Selama belajar di Rumah Quran Insan Toda</h5>
 
         <?php if (!empty($capaian)) : ?>
             <div id="capaianSplide" class="splide">
                 <div class="splide__track">
                     <ul class="splide__list">
                         <?php foreach ($capaian as $item): ?>
-<li class="splide__slide">
-    <div class="card border-0 shadow-sm text-center">
-        <?php if (!empty($item->image)): ?>
-            <img src="<?= base_url('uploads/capaian/' . htmlspecialchars($item->image)) ?>"
-                style="height: 180px; object-fit: cover; width: 100%;">
-        <?php endif; ?>
-        <div class="card-body p-2">
-            <h6 class="card-title text-uppercase mb-1"><?= htmlspecialchars($item->name ?? '-') ?></h6>
-            <p class="card-text text-muted mb-0"><?= htmlspecialchars($item->achievement ?? '-') ?></p>
-        </div>
-    </div>
-</li>
+                            <li class="splide__slide">
+                                <div class="card border-0 shadow-sm text-center">
+                                    <?php if (!empty($item->image)): ?>
+                                        <img src="<?= base_url('uploads/capaian/' . htmlspecialchars($item->image)) ?>"
+                                            style="height: 180px; object-fit: cover; width: 100%;">
+                                    <?php endif; ?>
+                                    <div class="card-body p-2">
+                                        <h6 class="card-title text-uppercase mb-1"><?= htmlspecialchars($item->name ?? '-') ?></h6>
+                                        <p class="card-text text-muted mb-0"><?= htmlspecialchars($item->achievement ?? '-') ?></p>
+                                    </div>
+                                </div>
+                            </li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
@@ -108,19 +130,19 @@ include 'layout/navbar.php';
         <?php endif; ?>
     </div>
 </section>
+
 <?php endif; ?>
 
 <!-- Galeri dan Agenda -->
 <?php if (!empty($menu_status['gallery']) || !empty($menu_status['agenda'])): ?>
-<section class="page-section bg-light" id="galeri">
-    <div class="container pb-2">
+<section class="py-5 bg-light" id="galeri">
+    <div class="container">
         <div class="row">
 
-            <!-- Gallery Sekolah -->
             <?php if (!empty($menu_status['gallery'])): ?>
             <div class="col-lg-6 mb-4">
-                <div class="bg-dark text-white rounded shadow p-3">
-                    <div class="h5 text-uppercase pb-2">Gallery Sekolah</div>
+                <div class="bg-dark text-white rounded shadow p-4 h-100">
+                    <h5 class="text-uppercase mb-4">Gallery Sekolah</h5>
                     <?php if (!empty($gallery)) : ?>
                         <div id="carouselGaleri" class="carousel slide carousel-fade" data-ride="carousel">
                             <div class="carousel-inner">
@@ -150,13 +172,12 @@ include 'layout/navbar.php';
             </div>
             <?php endif; ?>
 
-            <!-- Kegiatan Sekolah -->
             <?php if (!empty($menu_status['agenda'])): ?>
-            <div class="col-xxl-7 col-lg-6 mb-3 mb-lg-4">
-                <div class="h5 text-uppercase">Kegiatan Sekolah</div>
+            <div class="col-lg-6 mb-4">
+                <h5 class="text-uppercase mb-4">Kegiatan Sekolah</h5>
                 <?php if (!empty($agenda)) : ?>
                     <?php foreach (array_slice($agenda, 0, 4) as $event): ?>
-                        <div class="media mb-4 border-bottom pb-2">
+                        <div class="media mb-4 pb-2 border-bottom">
                             <img src="<?= base_url('uploads/agenda/' . htmlspecialchars($event->image ?? 'default.jpg')); ?>"
                                 class="mr-3 rounded"
                                 alt="<?= htmlspecialchars($event->title); ?>"
@@ -177,6 +198,7 @@ include 'layout/navbar.php';
         </div>
     </div>
 </section>
+
 <?php endif; ?>
 
 <!-- CTA Pendaftaran -->
@@ -227,12 +249,12 @@ include 'layout/navbar.php';
     document.addEventListener('DOMContentLoaded', function () {
         new Splide('#capaianSplide', {
             type: 'loop',
-            autoWidth: true, // ✅ wajib autoWidth
+            autoWidth: true,
             gap: '0.2rem',
             pagination: false,
             arrows: false,
             autoScroll: {
-                speed: 1,
+                speed: 0.5,
             }
         }).mount(window.splide.Extensions);
     });
